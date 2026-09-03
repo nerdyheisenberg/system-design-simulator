@@ -19,7 +19,7 @@ export const CONFIG = {
    *   any URL – an explicit base, e.g.
    *             'https://github.com/you/system-design-handbook/blob/main/system-design-book/'
    */
-  bookBase: 'auto',
+  bookBase: 'https://github.com/nerdyheisenberg/system-design-handbook/blob/main/',
 
   /** Branch to use when building github.com blob URLs under 'auto'. */
   githubBranch: 'main',
