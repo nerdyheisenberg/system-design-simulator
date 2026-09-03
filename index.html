@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>System Design Simulator</title>
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div id="app">
+
+  <header id="toolbar">
+    <div class="brand">
+      <div class="logo">SD</div>
+      <div>
+        <b>System Design Simulator</b>
+        <small>build it · load it · break it · learn why</small>
+      </div>
+    </div>
+
+    <div class="tgroup">
+      <button class="btn primary" id="btnPlay">▶ Run</button>
+      <button class="btn" id="btnStep" title="Advance 1 simulated second">Step</button>
+      <button class="btn" id="btnReset" title="Reset simulation clock">Reset</button>
+      <select class="btn" id="selSpeed" title="Simulation speed">
+        <option value="0.5">0.5x</option>
+        <option value="1" selected>1x</option>
+        <option value="2">2x</option>
+        <option value="5">5x</option>
+        <option value="10">10x</option>
+      </select>
+    </div>
+
+    <div class="tgroup">
+      <span class="tlabel">Load</span>
+      <input type="range" id="rngRps" min="1" max="700" value="330" style="width:130px">
+      <input type="number" id="numRps" value="2000" min="1" max="5000000" style="width:92px">
+      <span class="tlabel">rps</span>
+    </div>
+
+    <div class="tgroup">
+      <span class="tlabel">Shape</span>
+      <select class="btn" id="selPattern">
+        <option value="steady">Steady</option>
+        <option value="ramp">Ramp up</option>
+        <option value="spike">Periodic spike</option>
+        <option value="diurnal">Diurnal</option>
+        <option value="sawtooth">Sawtooth</option>
+        <option value="flashsale">Flash sale</option>
+      </select>
+      <span class="tlabel">Reads</span>
+      <input type="range" id="rngRead" min="0" max="100" value="90" style="width:80px">
+      <span class="tlabel mono" id="lblRead">90%</span>
+    </div>
+
+    <div class="tgroup">
+      <button class="btn" id="btnBlueprints">Blueprints</button>
+      <button class="btn" id="btnMissions">Missions</button>
+      <button class="btn on" id="btnPackets" title="Toggle packet animation">Packets</button>
+      <button class="btn" id="btnFit" title="Fit to screen">Fit</button>
+    </div>
+
+    <div class="tgroup">
+      <button class="btn" id="btnSave" title="Save to browser storage">Save</button>
+      <button class="btn" id="btnExport">Export</button>
+      <label class="file-btn" title="Import a .json topology">Import<input type="file" id="fileImport" accept="application/json" hidden></label>
+      <button class="btn danger" id="btnClear">Clear</button>
+      <button class="btn" id="btnHelp">?</button>
+    </div>
+  </header>
+
+  <div id="main">
+
+    <aside id="palette">
+      <div class="panel-head"><span>Components</span><span class="mono" id="compCount"></span></div>
+      <div class="search"><input type="text" id="compSearch" placeholder="Search components…"></div>
+      <div class="scroll" id="compList"></div>
+    </aside>
+
+    <section id="stage">
+      <canvas id="canvas"></canvas>
+      <div id="hud"></div>
+      <div id="gradeBadge"><div class="g">–</div><div class="s">design score</div></div>
+      <div id="canvasHint">drag from palette · drag the right dot to connect · double-click an edge to change its kind · right-click for actions</div>
+      <div id="missionCard">
+        <div class="mhead">
+          <div class="lv" id="mLevel"></div>
+          <b id="mName"></b>
+          <div class="progress"><i id="mProgress" style="width:0%"></i></div>
+        </div>
+        <div class="mbody" id="mBody"></div>
+      </div>
+    </section>
+
+    <aside id="right">
+      <div class="tabs" id="tabs">
+        <div class="tab active" data-t="inspect">Inspect</div>
+        <div class="tab" data-t="doctor">Doctor<span class="badge" id="badgeDoctor" style="display:none"></span></div>
+        <div class="tab" data-t="metrics">Telemetry</div>
+        <div class="tab" data-t="chaos">Chaos</div>
+        <div class="tab" data-t="cost">Cost</div>
+        <div class="tab" data-t="log">Log</div>
+      </div>
+      <div class="tabpanel active" id="p-inspect"></div>
+      <div class="tabpanel" id="p-doctor"></div>
+      <div class="tabpanel" id="p-metrics"></div>
+      <div class="tabpanel" id="p-chaos"></div>
+      <div class="tabpanel" id="p-cost"></div>
+      <div class="tabpanel" id="p-log"></div>
+    </aside>
+
+  </div>
+</div>
+
+<div id="overlay"><div class="modal"><div class="mh"><b id="modalTitle"></b><button class="btn" id="modalClose">Close</button></div><div class="mb" id="modalBody"></div></div></div>
+<div id="ctxmenu"></div>
+<div id="toast"></div>
+
+<script type="module" src="js/ui/app.js"></script>
+</body>
+</html>
